@@ -1,0 +1,22 @@
+sudo: required
+
+
+services:
+  - docker
+before_install:
+  - docker build -t chaqattack/devops-users-app --build-arg DB_USERNAME=$DB_USERNAME --build-arg DB_PASSWORD=$DB_PASSWORD .
+script:
+  - docker run -e CI=true chaqattack/devops-users-app npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "DevOpsUsersAPP"
+  env: "devopsusersapp-env"
+  bucket_name: "elasticbeanstalk-us-east-2-911266112348"
+  bucket_path: "DevOpsUsersAPP"
+  on:
+    branch: "master"
+  access_key_id: 
+    secure: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
