@@ -6,7 +6,7 @@ services:
 before_install:
   - docker build -t chaqattack/devops-users-app --build-arg DB_USERNAME=$DB_USERNAME --build-arg DB_PASSWORD=$DB_PASSWORD .
 script:
-  - docker run -e CI=true chaqattack/devops-users-app npm run test
+  - docker run chaqattack/devops-users-app npm run test -- --coverage
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
