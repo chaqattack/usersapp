@@ -1,6 +1,6 @@
 FROM node:8.11-alpine
 
-ARG DB_USERNAME\
+ARG DB_USERNAME \
     DB_PASSWORD
 
 ENV DEVOPS_TEST_DATABASE_NAME='devops_test' \
